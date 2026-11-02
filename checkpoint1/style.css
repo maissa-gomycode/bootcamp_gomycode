@@ -1,0 +1,397 @@
+
+/* =====================================
+   1. IMPORTATION DE LA POLICE ROBOTO
+===================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&display=swap');
+
+/* =====================================
+   2. VARIABLES DE COULEURS
+===================================== */
+:root {
+    --beige: #F5F0E8;
+    --beige-dark: #E9DFD0;
+    --blue-light: #DCE8F2;
+    --blue-medium: #7899B8;
+    --blue-dark: #315574;
+    --blue-deep: #1E3A56;
+    --white: #FFFFFF;
+    --text: #34495E;
+    --shadow: 0 8px 25px rgba(30, 58, 86, 0.09);
+}
+
+/* =====================================
+   3. STYLE GÉNÉRAL
+===================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--beige);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+/* =====================================
+   4. EN-TÊTE ET NAVIGATION
+===================================== */
+header {
+    background: linear-gradient(135deg, #1E3A56, #7899B8);
+    color: white;
+    padding: 35px 8% 25px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 17px;
+    color: #E4EDF5;
+    margin-bottom: 25px;
+}
+
+/* Navigation intégrée */
+nav {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 12px 25px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 9px 15px;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background-color: var(--beige);
+    color: var(--blue-deep);
+}
+
+/* =====================================
+   5. CONTENU PRINCIPAL
+===================================== */
+main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 25px;
+}
+
+/* Sections */
+section {
+    background-color: var(--white);
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--blue-medium);
+}
+
+section h2 {
+    color: var(--blue-deep);
+    font-size: 28px;
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--blue-light);
+}
+
+section h3 {
+    color: var(--blue-dark);
+    font-size: 19px;
+    margin: 25px 0 12px;
+}
+
+section p {
+    margin-bottom: 15px;
+}
+
+/* =====================================
+   6. SECTION ACCUEIL
+===================================== */
+#accueil {
+    text-align: center;
+    background: linear-gradient(135deg, #E9DFD0, #DCE8F2);
+    border: none;
+    padding: 55px 35px;
+}
+
+#accueil h2 {
+    border: none;
+    font-size: 34px;
+}
+
+#accueil img {
+    width: 190px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid white;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+}
+
+#accueil a {
+    display: inline-block;
+    background-color: var(--blue-deep);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+#accueil a:hover {
+    background-color: var(--blue-medium);
+    transform: translateY(-3px);
+}
+
+/* =====================================
+   7. LISTES
+===================================== */
+section ul,
+section ol {
+    padding-left: 25px;
+    margin: 12px 0 20px;
+}
+
+section li {
+    padding: 5px 0;
+}
+
+section li::marker {
+    color: var(--blue-medium);
+}
+
+/* =====================================
+   8. EXPÉRIENCES PROFESSIONNELLES
+===================================== */
+#experience article {
+    background-color: #F5F8FB;
+    border-left: 4px solid var(--blue-medium);
+    padding: 22px;
+    margin: 20px 0;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+#experience article:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
+}
+
+#experience article h3 {
+    margin-top: 0;
+    color: var(--blue-deep);
+}
+
+/* =====================================
+   9. VIDÉO
+===================================== */
+video {
+    max-width: 100%;
+    border-radius: 12px;
+    margin: 15px 0;
+    box-shadow: var(--shadow);
+}
+
+/* =====================================
+   10. TABLEAU DE FORMATION
+===================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background-color: var(--blue-deep);
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+td {
+    padding: 13px 15px;
+    border-bottom: 1px solid var(--blue-light);
+}
+
+tbody tr:nth-child(even) {
+    background-color: #F1F5F9;
+}
+
+tbody tr:hover {
+    background-color: var(--blue-light);
+}
+
+/* =====================================
+   11. LIENS
+===================================== */
+section a {
+    color: var(--blue-dark);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+section a:hover {
+    color: var(--blue-medium);
+}
+
+/* =====================================
+   12. FORMULAIRE DE CONTACT
+===================================== */
+form {
+    background-color: #F5F8FB;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+label {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--blue-deep);
+    margin-bottom: 7px;
+}
+
+input:not([type="checkbox"]),
+select,
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 5px 0 15px;
+    border: 1px solid #CCD9E5;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    background-color: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--blue-medium);
+    box-shadow: 0 0 0 3px rgba(120, 153, 184, 0.15);
+}
+
+input[type="checkbox"] {
+    accent-color: var(--blue-dark);
+}
+
+button {
+    padding: 12px 22px;
+    margin: 10px 8px 0 0;
+    border: none;
+    border-radius: 25px;
+    background-color: var(--blue-deep);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: var(--blue-medium);
+    transform: translateY(-2px);
+}
+
+button[type="reset"] {
+    background-color: var(--beige-dark);
+    color: var(--blue-deep);
+}
+
+/* =====================================
+   13. PIED DE PAGE
+===================================== */
+footer {
+    background: linear-gradient(135deg, #1E3A56, #315574);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+footer a {
+    display: inline-block;
+    margin-top: 12px;
+    color: #DCE8F2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* =====================================
+   14. RESPONSIVE DESIGN
+===================================== */
+@media (max-width: 768px) {
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    nav {
+        border-radius: 15px;
+        padding: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    main {
+        padding: 0 12px;
+    }
+
+    section {
+        padding: 22px;
+    }
+
+    section h2 {
+        font-size: 23px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 9px;
+    }
+}
