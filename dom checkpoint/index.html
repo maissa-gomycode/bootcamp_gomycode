@@ -1,0 +1,38 @@
+<html>  
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Panier</title>
+        <style>
+            .like {
+                color: gray;
+                cursor: pointer;
+                border: none;
+                background: none;
+                font-size: 25px;
+            }
+
+            .like.liked {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>          
+        <div class="cart-item">
+            <h3 class="product-name">T-shirt</h3>
+
+            <p class="price">50 TND</p>
+
+            <button class="minus">-</button>
+            <span class="quantity">1</span>
+            <button class="plus">+</button>
+
+            <button class="like">♥</button>
+            <button class="delete">🗑</button>
+        </div>
+
+        <div>
+            Total : <span id="total">50 TND</span>
+        </div>
+    </body>
+</html>
