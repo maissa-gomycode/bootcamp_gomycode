@@ -1,0 +1,35 @@
+# Créer l'API backend
+fastapi
+
+# 	Lancer le serveur
+uvicorn
+
+# Communiquer avec l'API OpenAI
+openai
+
+# Lire les variables du fichier .env
+python-dotenv
+
+pytest
+httpx
+pytest-asyncio
+
+
+openai_secure_project/
+│
+├── app/
+│   ├── main.py
+│   ├── routers/
+│   │   └── chat.py
+│   └── services/
+│       └── ai.py
+│
+├── tests/
+│   ├── test_health.py
+│   └── test_chat_validation.py
+│
+├── docs/
+│   └── api-test-results.md
+│
+├── .env
+└── requirements.txt
