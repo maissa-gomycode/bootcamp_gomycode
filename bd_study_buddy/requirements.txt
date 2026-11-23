@@ -1,0 +1,10 @@
+google-genai
+python-dotenv
+fastapi
+uvicorn
+sqlalchemy
+pwdlib[argon2]
+python-jose[cryptography]
+email-validator
+pydantic
+redis
