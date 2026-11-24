@@ -4,6 +4,7 @@
 # ==================================================
 
 import os
+import asyncio
 
 from dotenv import load_dotenv
 from google import genai
@@ -14,13 +15,10 @@ from google.genai import errors
 # 1. CHARGEMENT DE LA CONFIGURATION
 # ==================================================
 
-# Charge les variables présentes dans le fichier .env
 load_dotenv()
 
-# Récupère la clé API Gemini
 api_key = os.getenv("GEMINI_API_KEY")
 
-# Vérifie que la clé API existe
 if not api_key:
     raise ValueError(
         "GEMINI_API_KEY introuvable dans les variables d'environnement."
@@ -31,8 +29,10 @@ if not api_key:
 # 2. CRÉATION DU CLIENT GEMINI
 # ==================================================
 
-# Le client permet de communiquer avec l'API Gemini
 client = genai.Client(api_key=api_key)
+
+MODEL = "gemini-2.5-flash"
+TIMEOUT = 20
 
 
 # ==================================================
@@ -50,23 +50,20 @@ Si la question n'est pas claire, demandez des précisions.
 
 
 # ==================================================
-# 4. FONCTION D'APPEL DU MODÈLE LLM
+# 4. FONCTION ASYNCHRONE D'APPEL DU MODÈLE
 # ==================================================
 
-def call_llm(user_message: str) -> dict:
+async def call_llm(user_message: str) -> dict:
 
     try:
 
-        # Envoie une requête au modèle Gemini
-        response = client.models.generate_content(
+        # Appel asynchrone à Gemini
+        response = await client.aio.models.generate_content(
 
-            # Nom du modèle utilisé
-            model="gemini-2.5-flash",
+            model=MODEL,
 
-            # Instructions et message utilisateur
             contents=user_message,
 
-            # Configuration du modèle
             config={
                 "system_instruction": SYSTEM_PROMPT,
                 "temperature": 0.3,
@@ -74,39 +71,131 @@ def call_llm(user_message: str) -> dict:
             }
         )
 
-        # Récupère le contenu de la réponse générée
         answer = response.text or ""
 
-        # Récupère le nombre total de tokens utilisés
         tokens_used = (
             response.usage_metadata.total_token_count
             if response.usage_metadata
             else 0
         )
 
-        # Retourne les informations sous forme de dictionnaire
         return {
             "answer": answer,
-            "model": "gemini-2.5-flash",
+            "model": MODEL,
             "tokens_used": tokens_used
         }
 
-    # Erreur liée à une clé API invalide
     except errors.ClientError as e:
 
-       
         print(f"Erreur Gemini : {e}")
 
         if e.code in (401, 403):
-            raise RuntimeError("Clé API invalide ou accès refusé.")
+            raise RuntimeError(
+                "Clé API invalide ou accès refusé."
+            )
 
         if e.code == 429:
-            raise RuntimeError("Limite d'utilisation Gemini atteinte.")
+            raise RuntimeError(
+                "Limite d'utilisation Gemini atteinte."
+            )
 
-        raise RuntimeError(f"Erreur API Gemini : {e}")
+        raise RuntimeError("Erreur API Gemini.")
 
     except Exception as e:
 
         print(f"Erreur inattendue : {type(e).__name__}: {e}")
 
-        raise RuntimeError(f"Erreur interne Gemini : {e}")
+        raise RuntimeError(
+            "Une erreur interne est survenue avec Gemini."
+        )
+
+
+# ==================================================
+# 5. FONCTION AVEC TIMEOUT
+# ==================================================
+
+async def generate_ai_response(user_message: str) -> dict:
+
+    try:
+
+        result = await asyncio.wait_for(
+            call_llm(user_message),
+            timeout=TIMEOUT
+        )
+
+        return result
+
+    except asyncio.TimeoutError:
+
+        raise TimeoutError(
+            "Le service Gemini met trop de temps à répondre."
+        )
+
+    except RuntimeError:
+        raise
+
+    except Exception as e:
+
+        print(f"Erreur service IA : {e}")
+
+        raise RuntimeError(
+            "Impossible de générer une réponse IA."
+        )
+
+
+# ==================================================
+# 6. GÉNÉRATION DU RÉSUMÉ
+# ==================================================
+
+async def generate_summary(content: str) -> str:
+
+    prompt = f"""
+    Génère un résumé clair et structuré du cours suivant.
+
+    Cours :
+    {content}
+    """
+
+    result = await generate_ai_response(prompt)
+
+    return result["answer"]
+
+
+# ==================================================
+# 7. GÉNÉRATION DU QUIZ
+# ==================================================
+
+async def generate_quiz(content: str) -> str:
+
+    prompt = f"""
+    Génère un quiz de 5 questions à choix multiples
+    basé sur le cours suivant.
+
+    Indique les bonnes réponses à la fin.
+
+    Cours :
+    {content}
+    """
+
+    result = await generate_ai_response(prompt)
+
+    return result["answer"]
+
+
+# ==================================================
+# 8. GÉNÉRATION DES FICHES DE RÉVISION
+# ==================================================
+
+async def generate_flashcards(content: str) -> str:
+
+    prompt = f"""
+    Génère 5 fiches de révision sous forme de questions
+    et réponses basées sur le cours suivant.
+
+    Cours :
+    {content}
+    """
+
+    result = await generate_ai_response(prompt)
+
+    return result["answer"]

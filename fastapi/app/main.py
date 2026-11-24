@@ -2,17 +2,15 @@
 from fastapi import FastAPI
 from app.routers import chat
 
-# Création de l'application
 app = FastAPI(
     title="API Backend",
     description="Backend FastAPI connecté à Gemini.",
     version="1.0.0"
 )
 
-# Enregistrement du routeur
 app.include_router(chat.router)
 
-# Endpoint de santé
+
 @app.get("/health")
 def health():
     return {
