@@ -1,0 +1,10 @@
+Les e-mails se classent comme suit :
+
+1. Zero-Shot Prompting :
+- « N'oubliez pas la réunion d'équipe à 14h. Veuillez apporter vos mises à jour de projet. »
+- Catégorie : Travail
+2. Few-Shot Prompting :
+- « Dîner à 20h ce soir ? J'apporte le vin. » → Personnel
+- « Vous avez gagné un iPhone gratuit ! Cliquez ici pour réclamer votre prix. » → Spam
+- « Le rapport financier du deuxième trimestre est attendu demain soir. » → Travail
+- « Êtes-vous libre pour déjeuner ce week-end ? » → Personnel
